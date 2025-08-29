@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import os
 import re
 from dotenv import load_dotenv
+from collections import OrderedDict
 
 # Load environment variables
 load_dotenv()
@@ -63,28 +64,31 @@ def bfhl():
         ]
         concat_string = "".join(alt_cased_chars)
 
-        response = {
-            "is_success": True,
-            "user_id": USER_ID,
-            "email": EMAIL,
-            "roll_number": ROLL_NUMBER,
-            "odd_numbers": odd_numbers,
-            "even_numbers": even_numbers,
-            "alphabets": alphabets,
-            "special_characters": special_characters,
-            "sum": str(total_sum),
-            "concat_string": concat_string,
-        }
+        # Use OrderedDict to enforce the required key order
+        response = OrderedDict([
+            ("is_success", True),
+            ("user_id", USER_ID),
+            ("email", EMAIL),
+            ("roll_number", ROLL_NUMBER),
+            ("odd_numbers", odd_numbers),
+            ("even_numbers", even_numbers),
+            ("alphabets", alphabets),
+            ("special_characters", special_characters),
+            ("sum", str(total_sum)),
+            ("concat_string", concat_string)
+        ])
+
         return jsonify(response), 200
 
     except Exception as e:
-        return jsonify({
-            "is_success": False,
-            "message": f"Bad Request: {e}",
-            "user_id": USER_ID,
-            "email": EMAIL,
-            "roll_number": ROLL_NUMBER,
-        }), 400
+        error_response = OrderedDict([
+            ("is_success", False),
+            ("message", f"Bad Request: {e}"),
+            ("user_id", USER_ID),
+            ("email", EMAIL),
+            ("roll_number", ROLL_NUMBER)
+        ])
+        return jsonify(error_response), 400
 
 if __name__ == "__main__":
     app.run()
