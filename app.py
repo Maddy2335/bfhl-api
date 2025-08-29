@@ -6,10 +6,10 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-FULL_NAME = os.getenv("FULL_NAME", "john doe").strip().lower().replace(" ", "_")
-DOB_DDMMYYYY = os.getenv("DOB_DDMMYYYY", "17091999").strip()
-EMAIL = os.getenv("EMAIL", "john@xyz.com").strip()
-ROLL_NUMBER = os.getenv("ROLL_NUMBER", "ABCD123").strip()
+FULL_NAME = os.getenv("FULL_NAME", "madheshwaran s").strip().lower().replace(" ", "_")
+DOB_DDMMYYYY = os.getenv("DOB_DDMMYYYY", "23032005").strip()
+EMAIL = os.getenv("EMAIL", "madheshwaran.s2022@vitstudent.ac.in").strip()
+ROLL_NUMBER = os.getenv("ROLL_NUMBER", "22BRS1183").strip()
 USER_ID = f"{FULL_NAME}_{DOB_DDMMYYYY}"
 
 app = Flask(__name__)
